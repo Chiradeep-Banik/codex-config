@@ -1,0 +1,42 @@
+# Codex local runtime state
+.codex
+.codex-global-state.json
+.personality_migration
+auth.json
+installation_id
+history.jsonl
+session_index.jsonl
+models_cache.json
+version.json
+
+# Local temp and sync artifacts
+.tmp/
+tmp/
+shell_snapshots/
+worktrees/
+
+# Runtime logs and databases
+log/
+logs*.sqlite
+logs*.sqlite-*
+state_*.sqlite
+state_*.sqlite-*
+sqlite/
+
+# Conversation/session archives
+sessions/
+archived_sessions/
+
+# App and plugin caches
+cache/
+plugins/cache/
+vendor_imports/
+skills/.system/
+
+# Local scratch directories
+memories/
+.codex-scafold/
+
+# Python cache
+__pycache__/
+*.py[cod]
