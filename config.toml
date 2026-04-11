@@ -95,6 +95,7 @@ collaboration_modes = true
 steer = true
 unified_exec = true
 apps = true
+codex_hooks = true
 
 [history]
 # save-all (default) | none
@@ -120,3 +121,9 @@ command = "npx"
 args = ["-y", "mongodb-mcp-server@latest", "--readOnly"]
 env = { MDB_MCP_CONNECTION_STRING = "mongodb+srv://main_v2_admin:SXEVD5GmDhrSUBZW@main.ls8m4c.mongodb.net/?appName=main" }
 startup_timeout_ms = 30000
+
+[mcp_servers.context-mode]
+command = "context-mode"
+
+[mcp_servers.context-mode.tools.ctx_doctor]
+approval_mode = "approve"

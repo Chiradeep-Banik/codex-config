@@ -1,6 +1,6 @@
 name = "question_asker"
 description = "Clarifies product requirements, constraints, assumptions, and success criteria before planning."
-model = "gpt-5.4-mini"
+model = "gpt-5.4"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 

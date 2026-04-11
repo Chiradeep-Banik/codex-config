@@ -1,7 +1,7 @@
 name = "phase_planner"
 description = "Expands one broad phase into a detailed execution plan with technical breakdown, chunking, and validation."
 model = "gpt-5.4"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 
 developer_instructions = """

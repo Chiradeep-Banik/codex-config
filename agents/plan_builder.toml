@@ -1,7 +1,7 @@
 name = "plan_builder"
 description = "Builds broad multi-phase project plans and phase markdown files from clarified requirements."
 model = "gpt-5.4"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 
 developer_instructions = """
