@@ -1,6 +1,6 @@
 ---
 name: vik
-description: Use for explicit top-level execution requests like "$vik <phase>". Reads current phase state, creates detailed execution plan, delegates bounded implementation chunks, delegates review, and updates status.md.
+description: Use for explicit top-level execution requests like "$vik <phase>". Reads current phase state, creates detailed execution plan, delegates bounded implementation chunks with full testing/linting checks, and updates status.md.
 ---
 
 # VIK Skill
@@ -19,9 +19,8 @@ Explicit invocation only:
 Take one broad phase and move it through:
 
 1. detailed planning
-2. bounded implementation
-3. review
-4. status update
+2. bounded implementation with testing and linting
+3. status update
 
 Keep parent context clean by loading only needed files and writing progress back to disk.
 
@@ -36,25 +35,25 @@ Keep parent context clean by loading only needed files and writing progress back
 5. Read existing phase folder files if present:
    - `execution-plan.md`
    - `progress.md`
-   - `review.md`
 6. If no detailed plan exists or phase changed materially, explicitly delegate to `phase_planner`.
 7. Write `project-plans/NN-phase-name/execution-plan.md`.
 8. Decide chunking:
    - small phase = one `implementer`
    - medium/large phase = multiple bounded `implementer` runs
-9. Each implementer gets explicit ownership.
-10. After each major chunk, delegate to `reviewer`.
-11. Update:
+9. Each implementer gets explicit ownership and must:
+   - Write/update code
+   - Run tests and ensure they pass
+   - Run linting and fix issues
+   - Verify node checks pass
+10. Update:
    - `progress.md`
-   - `review.md`
    - `status.md`
-12. If phase is complete, advance `current_phase` or mark project done.
+11. If phase is complete, advance `current_phase` or mark project done.
 
 ## Delegation Rules
 
 - `phase_planner` for detailed plan only
-- `implementer` for code only
-- `reviewer` for review only
+- `implementer` for code, testing, linting, and verification
 
 Do not let child agents redefine product scope.
 
@@ -65,19 +64,17 @@ Split work when:
 - write scope is large
 - multiple subsystems involved
 - testing burden is high
-- review finds unresolved issues
 
 Each chunk should have:
 
 - explicit file/module ownership
 - clear completion condition
-- clear validation step
+- clear validation step (tests, linting, node checks)
 
 ## Required Disk Writes
 
 - `project-plans/NN-phase-name/execution-plan.md`
 - `project-plans/NN-phase-name/progress.md`
-- `project-plans/NN-phase-name/review.md`
 - `project-plans/status.md`
 
 ## Anti-Patterns
@@ -87,4 +84,4 @@ Do not:
 - keep plan only in chat memory
 - ask broad product questions during implementation unless blocked
 - let one implementer own whole repository without reason
-- skip review before marking phase done
+- mark phase done without implementer running tests, linting, and node checks

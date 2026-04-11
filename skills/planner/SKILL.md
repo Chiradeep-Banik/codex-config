@@ -28,8 +28,11 @@ Take a project requirement and turn it into durable broad-phase planning artifac
 2. Check whether `project-plans/` exists.
 3. If missing, create it.
 4. Inspect `project-plans/status.md` if present.
-5. If requirement is ambiguous, explicitly delegate to `question_asker`.
-6. Collect clarified requirement summary.
+5. **Ask clarification questions to the user for ANY ambiguity or missing details:**
+   - Ask about scope, priorities, constraints, integrations, or non-functional requirements
+   - Use AskUserQuestion tool for explicit user clarification
+   - Wait for user responses before proceeding
+6. Collect clarified requirement summary from user answers.
 7. Explicitly delegate to `plan_builder`.
 8. Write or update:
    - `project-plans/status.md`
