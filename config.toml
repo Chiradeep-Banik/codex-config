@@ -66,6 +66,38 @@ If user asks for normal mode, more detail, or fuller prose, switch immediately.
 web_search = "live"
 personality = "pragmatic"
 approvals_reviewer = "user"
+
+[[skills.config]]
+path = "/home/banik/.codex/plugins/cache/openai-curated/github/fb0a18376bcd9f2604047fbe7459ec5aed70c64b/skills/gh-address-comments/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/banik/.codex/plugins/cache/openai-curated/gmail/fb0a18376bcd9f2604047fbe7459ec5aed70c64b/skills/gmail/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/banik/.codex/plugins/cache/openai-curated/gmail/fb0a18376bcd9f2604047fbe7459ec5aed70c64b/skills/gmail-inbox-triage/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/banik/.codex/skills/.system/imagegen/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/banik/.codex/skills/.system/openai-docs/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/banik/.codex/skills/.system/plugin-creator/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/banik/.codex/skills/.system/skill-creator/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/banik/.codex/skills/.system/skill-installer/SKILL.md"
+enabled = false
 [projects."/home/banik/Desktop/Code/FINIFI/finifibackend"]
 trust_level = "trusted"
 
@@ -114,12 +146,6 @@ CONTEXT7_API_KEY = "ctx7sk-f803ba9a-80ed-4c69-9b74-95ce01064834"
 command = "npx"
 args = ["-y", "kubernetes-mcp-server@latest"]
 env = {}
-startup_timeout_ms = 30000
-
-[mcp_servers.mongodb]
-command = "npx"
-args = ["-y", "mongodb-mcp-server@latest", "--readOnly"]
-env = { MDB_MCP_CONNECTION_STRING = "mongodb+srv://main_v2_admin:SXEVD5GmDhrSUBZW@main.ls8m4c.mongodb.net/?appName=main" }
 startup_timeout_ms = 30000
 
 [mcp_servers.context-mode]
