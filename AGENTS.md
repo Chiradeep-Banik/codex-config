@@ -1,90 +1,43 @@
-# Repo Instructions
+# Agent Execution Policy
 
-## System Goal
+## Core Principle
+Always choose the fastest, most precise, and most readable tool. Avoid legacy Unix tools unless absolutely necessary.
 
-This repository uses a disk-first orchestration pattern for Codex.
+---
 
-Top-level workflows:
+## Tool Priority (STRICT)
 
-- `$planner` = clarify project requirement and generate broad phases
-- `$vik` = take one phase, expand it into execution plan, implement in chunks, review, and advance status
+### Search
+- Use `rg` (ripgrep)
+- NEVER use `grep` unless `rg` is unavailable
 
-## Working Rules
+### File Discovery
+- Use `fd`
+- NEVER use `find` unless required for special cases
 
-- Keep orchestrator context small.
-- Write durable state to `project-plans/`.
-- Prefer updating existing planning artifacts over creating redundant files.
-- Never store critical phase state only in conversation memory.
-- If `project-plans/status.md` exists, treat it as source of truth for current phase.
-- If phase intent is unclear, ask focused questions before planning or coding.
+### File Viewing
+- Use `bat`
+- NEVER use `cat` for readable output
 
-## Planner Contract
+### JSON Processing
+- Use `jq`
+- NEVER parse JSON manually
 
-`$planner` must:
+### Git
+- Use `git` with structured flags
+- Prefer `git log --oneline --graph`
+- Prefer `git diff` (use delta if configured)
 
-1. clarify requirement with targeted questions
-2. create `project-plans/` if missing
-3. create one broad markdown file per phase
-4. avoid granular implementation task breakdown at this stage
-5. create or update `project-plans/status.md`
+### Fuzzy Selection
+- Use `fzf` when filtering large outputs
 
-## VIK Contract
+---
 
-`$vik` must:
+## Command Patterns (MANDATORY)
 
-1. read `project-plans/status.md` and selected phase file
-2. generate a detailed execution plan inside that phase folder
-3. split large implementation into bounded chunks
-4. delegate coding to worker agents with explicit ownership
-5. delegate review to reviewer agent
-6. update progress and status files after each chunk or major decision
-
-## Worker Boundaries
-
-- `question_asker`: asks questions only
-- `plan_builder`: broad project phases only
-- `phase_planner`: detailed implementation plan for one phase
-- `implementer`: code changes only for assigned scope
-- `reviewer`: read-only review, findings first
-
-## File Conventions
-
-Project planning root:
-
-```text
-project-plans/
-  status.md
-  01-phase-name.md
-  01-phase-name/
-    execution-plan.md
-    progress.md
-    review.md
-```
-
-Rules:
-
-- broad phase summary lives at root: `project-plans/01-phase-name.md`
-- phase detail lives in folder: `project-plans/01-phase-name/`
-- update in place when possible
-- use zero-padded phase numbers
-
-## Review Standard
-
-Reviewer output must prioritize:
-
-1. correctness bugs
-2. regressions
-3. missing tests
-4. mismatches against execution plan
-5. notable risk or follow-up
-
-## Escalation
-
-If requirement ambiguity blocks safe planning:
-
-- ask user directly
-- record assumption in phase file or execution plan
-- do not silently invent product behavior when risk is material
+### Search (ripgrep)
+```bash
+rg "<pattern>" -n --hidden -g '!node_modules' -g '!.git'
 
 # context-mode — MANDATORY routing rules
 
