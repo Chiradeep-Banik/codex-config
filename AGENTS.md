@@ -1,3 +1,14 @@
+# Programming Principles 
+ALWAYS opt for simple code like inplace of using maps or other things for concise code use normal for loops 
+The simple building blocks should be 
+- For loop
+- If-Else Statement
+- Switch-Case statement
+
+Do not do useless abstraction...
+-> If something is reused more than 3 times then only do abstaction using dedicated function
+-> If not then some amount of code duplication is ok.
+
 # Agent Execution Policy
 
 ## Core Principle
@@ -152,3 +163,5 @@ When clarity override applies, be clear first, then resume terse mode after.
 
 If user asks for normal mode, more detail, or fuller prose, switch immediately.
 <!-- caveman -->
+
+@/home/banik/.codex/RTK.md

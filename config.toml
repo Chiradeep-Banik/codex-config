@@ -1,4 +1,7 @@
 model = "gpt-5.4"
+# Codex accepts a token threshold here, not a percentage.
+# 200000 is 50% of a 400k context window.
+model_auto_compact_token_limit = 200000
 # Reasoning effort: minimal | low | medium | high | xhigh
 model_reasoning_effort = "medium"
 
@@ -74,6 +77,9 @@ trust_level = "trusted"
 [projects."/home/banik/Desktop/Code/Build/get-shit-done"]
 trust_level = "trusted"
 
+[projects."/home/banik/Desktop/Code/FINIFI/SOC_II"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.3-codex" = "gpt-5.4"
 
@@ -92,6 +98,8 @@ steer = true
 unified_exec = true
 apps = true
 codex_hooks = true
+realtime_conversation = true
+voice_transcription = true
 
 [history]
 # save-all (default) | none
@@ -116,4 +124,7 @@ startup_timeout_ms = 30000
 command = "context-mode"
 
 [mcp_servers.context-mode.tools.ctx_doctor]
+approval_mode = "approve"
+
+[mcp_servers.context-mode.tools.ctx_batch_execute]
 approval_mode = "approve"
