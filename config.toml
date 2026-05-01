@@ -1,9 +1,9 @@
-model = "gpt-5.4"
+model = "gpt-5.5"
 # Codex accepts a token threshold here, not a percentage.
 # 200000 is 50% of a 400k context window.
-model_auto_compact_token_limit = 200000
+model_auto_compact_token_limit = 205000
 # Reasoning effort: minimal | low | medium | high | xhigh
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 
 # Optional override used when Codex runs in plan mode: none | minimal | low | medium | high | xhigh
 plan_mode_reasoning_effort = "high"
@@ -80,11 +80,17 @@ trust_level = "trusted"
 [projects."/home/banik/Desktop/Code/FINIFI/SOC_II"]
 trust_level = "trusted"
 
+[notice]
+fast_default_opt_out = true
+
 [notice.model_migrations]
 "gpt-5.3-codex" = "gpt-5.4"
 
 [tui]
 status_line = ["context-remaining", "current-dir", "model-with-reasoning", "model-name", "git-branch", "context-used", "five-hour-limit", "weekly-limit"]
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
 
 [plugins."gmail@openai-curated"]
 enabled = true
@@ -100,6 +106,7 @@ apps = true
 codex_hooks = true
 realtime_conversation = true
 voice_transcription = true
+prevent_idle_sleep = true
 
 [history]
 # save-all (default) | none
@@ -108,23 +115,10 @@ persistence = "save-all"
 max_bytes = 104857600
 
 [mcp_servers.context7]
-type = "http"
 url = "https://mcp.context7.com/mcp"
 
 [mcp_servers.context7.http_headers]
 CONTEXT7_API_KEY = "ctx7sk-f803ba9a-80ed-4c69-9b74-95ce01064834"
 
-[mcp_servers.kubernetes]
-command = "npx"
-args = ["-y", "kubernetes-mcp-server@latest"]
-env = {}
-startup_timeout_ms = 30000
-
-[mcp_servers.context-mode]
+[mcp_servers.context_mode]
 command = "context-mode"
-
-[mcp_servers.context-mode.tools.ctx_doctor]
-approval_mode = "approve"
-
-[mcp_servers.context-mode.tools.ctx_batch_execute]
-approval_mode = "approve"
