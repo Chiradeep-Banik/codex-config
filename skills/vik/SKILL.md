@@ -1,6 +1,6 @@
 ---
 name: vik
-description: Use for explicit top-level execution requests like "$vik <phase>". Reads current phase state, creates detailed execution plan, delegates bounded implementation chunks with full testing/linting checks, and updates status.md.
+description: Use for explicit top-level execution requests like "$vik <phase>". Reads planner-created phase execution plans, delegates bounded implementation chunks only to implementer, runs verification through implementer, and updates status.md.
 ---
 
 # VIK Skill
@@ -18,9 +18,8 @@ Explicit invocation only:
 
 Take one broad phase and move it through:
 
-1. detailed planning
-2. bounded implementation with testing and linting
-3. status update
+1. bounded implementation with testing and linting
+2. status update
 
 Keep parent context clean by loading only needed files and writing progress back to disk.
 
@@ -32,12 +31,12 @@ Keep parent context clean by loading only needed files and writing progress back
    - explicit phase input wins
    - otherwise use `current_phase`
 4. Read broad phase file.
-5. Read existing phase folder files if present:
+5. Read phase folder files:
    - `execution-plan.md`
    - `progress.md`
-6. If no detailed plan exists or phase changed materially, explicitly delegate to `phase_planner`.
-7. Write `project-plans/NN-phase-name/execution-plan.md`.
-8. Decide chunking:
+6. If `execution-plan.md` is missing, stop and ask for `$planner` to create the phase execution plan.
+7. Decide next implementation chunk from `execution-plan.md` and `progress.md`.
+8. Delegate only to `implementer`:
    - small phase = one `implementer`
    - medium/large phase = multiple bounded `implementer` runs
 9. Each implementer gets explicit ownership and must:
@@ -45,15 +44,16 @@ Keep parent context clean by loading only needed files and writing progress back
    - Run tests and ensure they pass
    - Run linting and fix issues
    - Verify node checks pass
-10. Update:
+10. Integrate implementer results without broadening scope.
+11. Update:
    - `progress.md`
    - `status.md`
-11. If phase is complete, advance `current_phase` or mark project done.
+12. If phase is complete, advance `current_phase` or mark project done.
 
 ## Delegation Rules
 
-- `phase_planner` for detailed plan only
-- `implementer` for code, testing, linting, and verification
+- `implementer` only
+- no other child agents
 
 Do not let child agents redefine product scope.
 
@@ -82,6 +82,7 @@ Each chunk should have:
 Do not:
 
 - keep plan only in chat memory
+- call `phase_planner`
 - ask broad product questions during implementation unless blocked
 - let one implementer own whole repository without reason
 - mark phase done without implementer running tests, linting, and node checks

@@ -1,7 +1,7 @@
 name = "phase_planner"
 description = "Expands one broad phase into a detailed execution plan with technical breakdown, chunking, and validation."
-model = "gpt-5.4"
-model_reasoning_effort = "medium"
+model = "gpt-5.5"
+model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
 
 developer_instructions = """
@@ -10,16 +10,15 @@ Role: phase execution planner.
 Input:
 - broad phase file
 - current project context
-- optional existing progress or review files
+- optional existing progress files
 
-You produce a detailed execution plan for one phase.
+You produce a detailed execution plan for one phase when called by the planner skill.
 
 Rules:
 - ask targeted clarifying questions if technical ambiguity blocks safe planning
 - prefer bounded implementation chunks
 - define ownership by file or module area
 - include validation strategy
-- include reviewer checkpoints
 - include known risks and assumptions
 
 Execution plan sections:

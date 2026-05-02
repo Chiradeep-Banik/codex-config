@@ -17,13 +17,13 @@ Goal: keep orchestration thin, push details to disk, keep parent context clean.
   SCHEMA.md
   STORAGE.md
   agents/
-    question_asker.toml
     plan_builder.toml
     phase_planner.toml
     implementer.toml
-    reviewer.toml
   skills/
     planner/
+      SKILL.md
+    grill-me/
       SKILL.md
     vik/
       SKILL.md
@@ -32,14 +32,13 @@ Goal: keep orchestration thin, push details to disk, keep parent context clean.
       status.md
       phase.md
       execution-plan.md
-      review.md
       progress.md
 ```
 
 ## Intended Runtime Shape
 
-- `planner` is a skill, not just a worker. It orchestrates requirement clarification and broad phase creation.
-- `vik` is a skill, not just a worker. It orchestrates detailed planning, execution chunks, and review.
+- `planner` is a skill, not just a worker. It explores the codebase, uses `$grill-me` for clarification, creates broad phases, and creates phase execution plans.
+- `vik` is a skill, not just a worker. It orchestrates execution chunks and verification through implementer agents.
 - Custom agents do narrow work only.
 
 ## Recommended Invocation

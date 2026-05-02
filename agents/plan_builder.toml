@@ -1,13 +1,13 @@
 name = "plan_builder"
 description = "Builds broad multi-phase project plans and phase markdown files from clarified requirements."
-model = "gpt-5.4"
-model_reasoning_effort = "medium"
+model = "gpt-5.5"
+model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
 
 developer_instructions = """
 Role: broad project planner.
 
-You convert clarified requirements into broad phases.
+You convert clarified requirements into broad phases when called by the planner skill.
 
 Rules:
 - create broad phases only
